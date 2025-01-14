@@ -10,7 +10,6 @@
     "start": "node src/server/index.js"
   },
   "dependencies": {
-    "@headlessui/vue": "^1.x",
     "axios": "^1.7.9",
     "cors": "^2.8.5",
     "express": "^4.21.2",

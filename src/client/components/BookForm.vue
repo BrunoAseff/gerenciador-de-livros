@@ -11,10 +11,9 @@
             @submit.prevent="handleSubmit"
             class="space-y-4 bg-zinc-950 border-[1px] border-zinc-800 px-6 py-6 rounded-2xl"
           >
-            <!-- Campos preenchidos automaticamente -->
-            <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 mt-12">
-              <div>
-                <label class="block text-sm font-medium text-zinc-300"
+            <div class="grid grid-cols-10 gap-4 mt-12">
+              <div class="col-span-10 sm:col-span-4">
+                <label class="block text-sm font-medium text-zinc-400"
                   >Título</label
                 >
                 <div class="mt-1">
@@ -27,8 +26,8 @@
                   />
                 </div>
               </div>
-              <div>
-                <label class="block text-sm font-medium text-zinc-300"
+              <div class="col-span-10 sm:col-span-4">
+                <label class="block text-sm font-medium text-zinc-400"
                   >Autor(es)</label
                 >
                 <div class="mt-1">
@@ -41,12 +40,26 @@
                   />
                 </div>
               </div>
+              <div class="col-span-10 sm:col-span-2">
+                <label class="block text-sm font-medium text-zinc-400"
+                  >Páginas</label
+                >
+                <div class="mt-1">
+                  <input
+                    type="text"
+                    v-model="selectedBook.pageCount"
+                    readonly
+                    disabled
+                    class="text-zinc-100 border-[1px] border-zinc-800 py-3 w-full shadow-sm block px-4 bg-zinc-900 focus:bg-indigo-700/10 focus:border-indigo-500 sm:text-sm rounded-2xl focus:outline-none"
+                  />
+                </div>
+              </div>
             </div>
 
             <!-- Campos do usuário -->
-            <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
+            <div class="grid grid-cols-1 gap-6 sm:grid-cols-2">
               <div>
-                <label class="block text-sm font-medium text-zinc-300"
+                <label class="block text-sm font-medium text-zinc-400"
                   >Data de Início</label
                 >
                 <div class="mt-1">
@@ -59,7 +72,7 @@
                 </div>
               </div>
               <div>
-                <label class="block text-sm font-medium text-zinc-300"
+                <label class="block text-sm font-medium text-zinc-400"
                   >Data de Conclusão</label
                 >
                 <div class="mt-1">
@@ -73,7 +86,7 @@
             </div>
 
             <div>
-              <label class="block text-sm font-medium mt-2 text-zinc-300"
+              <label class="block text-sm font-medium mt-2 text-zinc-400"
                 >Deixe sua nota</label
               >
               <div class="mt-1">
@@ -82,7 +95,7 @@
             </div>
 
             <div>
-              <label class="block text-sm font-medium text-zinc-300"
+              <label class="block text-sm font-medium text-zinc-400"
                 >Deixe sua opinião</label
               >
               <div class="mt-1">

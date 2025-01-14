@@ -11,7 +11,7 @@
       type="button"
     >
       <svg
-        :class="[getStarColor(star), 'h-5 w-5 transition-colors duration-150']"
+        :class="[getStarColor(star), 'h-6 w-6 transition-colors duration-150']"
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 20 20"
         fill="currentColor"
