@@ -3,16 +3,15 @@
     <button
       v-for="star in 5"
       :key="star"
-      @click="!readonly && updateRating(star)"
+      @click.prevent="!readonly && updateRating(star)"
+      @mouseenter="!readonly && (hoverRating = star)"
+      @mouseleave="!readonly && (hoverRating = 0)"
       class="focus:outline-none"
       :disabled="readonly"
+      type="button"
     >
       <svg
-        :class="[
-          star <= modelValue ? 'text-yellow-400' : 'text-gray-300',
-          'h-5 w-5',
-          !readonly && 'hover:text-yellow-400',
-        ]"
+        :class="[getStarColor(star), 'h-5 w-5 transition-colors duration-150']"
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 20 20"
         fill="currentColor"
@@ -25,28 +24,36 @@
   </div>
 </template>
 
-<script>
-export default {
-  name: "BookRating",
-  props: {
-    modelValue: {
-      type: Number,
-      default: 0,
-    },
-    readonly: {
-      type: Boolean,
-      default: false,
-    },
-  },
-  emits: ["update:modelValue"],
-  setup(props, { emit }) {
-    const updateRating = (rating) => {
-      emit("update:modelValue", rating);
-    };
+<script setup>
+import { ref } from "vue";
 
-    return {
-      updateRating,
-    };
+const props = defineProps({
+  modelValue: {
+    type: Number,
+    default: 0,
   },
+  readonly: {
+    type: Boolean,
+    default: false,
+  },
+});
+
+const emit = defineEmits(["update:modelValue"]);
+const hoverRating = ref(0);
+
+const getStarColor = (star) => {
+  if (!props.readonly && hoverRating.value >= star) {
+    return "text-indigo-400";
+  }
+  if (props.modelValue >= star) {
+    return "text-indigo-400";
+  }
+  return props.readonly
+    ? "text-zinc-700"
+    : "text-zinc-700 hover:text-indigo-400";
+};
+
+const updateRating = (rating) => {
+  emit("update:modelValue", rating);
 };
 </script>

@@ -1,18 +1,18 @@
 <template>
-  <div class="border-[1px] border-zinc-900 shadow sm:rounded-2xl">
+  <div class="border-[1px] border-zinc-950 shadow sm:rounded-2xl">
     <div class="px-4 py-5 sm:p-6">
       <div>
-        <div class="space-y-4">
+        <div class="space-y-8">
           <div>
             <BookSearch @book-selected="handleBookSelection" />
           </div>
           <form
             v-if="selectedBook"
             @submit.prevent="handleSubmit"
-            class="space-y-4"
+            class="space-y-4 bg-zinc-950 border-[1px] border-zinc-800 px-6 py-6 rounded-2xl"
           >
             <!-- Campos preenchidos automaticamente -->
-            <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
+            <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 mt-12">
               <div>
                 <label class="block text-sm font-medium text-zinc-300"
                   >Título</label
@@ -22,7 +22,8 @@
                     type="text"
                     v-model="selectedBook.title"
                     readonly
-                    class="text-zinc-100 border-[1px] border-zinc-700 py-3 w-full shadow-sm block px-4 bg-zinc-900 sm:text-sm rounded-2xl"
+                    disabled
+                    class="text-zinc-100 border-[1px] border-zinc-800 py-3 w-full shadow-sm block px-4 bg-zinc-900 focus:bg-indigo-700/10 focus:border-indigo-500 sm:text-sm rounded-2xl"
                   />
                 </div>
               </div>
@@ -35,7 +36,8 @@
                     type="text"
                     v-model="selectedBook.authors"
                     readonly
-                    class="text-zinc-100 border-[1px] border-zinc-700 py-3 w-full shadow-sm block px-4 bg-zinc-900 sm:text-sm rounded-2xl"
+                    disabled
+                    class="text-zinc-100 border-[1px] border-zinc-800 py-3 w-full shadow-sm block px-4 bg-zinc-900 focus:bg-indigo-700/10 focus:border-indigo-500 sm:text-sm rounded-2xl focus:outline-none"
                   />
                 </div>
               </div>
@@ -52,7 +54,7 @@
                     type="date"
                     v-model="startDate"
                     required
-                    class="text-zinc-100 border-[1px] border-zinc-700 py-3 w-full shadow-sm block px-4 bg-zinc-900 sm:text-sm rounded-2xl focus:ring-indigo-500 focus:border-indigo-500"
+                    class="text-zinc-100 border-[1px] border-zinc-800 py-3 w-full shadow-sm block px-4 bg-zinc-900 focus:bg-indigo-700/10 sm:text-sm rounded-2xl focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
                   />
                 </div>
               </div>
@@ -64,7 +66,7 @@
                   <input
                     type="date"
                     v-model="endDate"
-                    class="text-zinc-100 border-[1px] border-zinc-700 py-3 w-full shadow-sm block px-4 bg-zinc-900 sm:text-sm rounded-2xl focus:ring-indigo-500 focus:border-indigo-500"
+                    class="text-zinc-100 border-[1px] focus:outline-none border-zinc-800 py-3 w-full shadow-sm block px-4 bg-zinc-900 focus:bg-indigo-700/10 sm:text-sm rounded-2xl focus:ring-indigo-500 focus:border-indigo-500"
                   />
                 </div>
               </div>
@@ -81,22 +83,23 @@
 
             <div>
               <label class="block text-sm font-medium text-zinc-300"
-                >Opinião</label
+                >Deixe sua opinião</label
               >
               <div class="mt-1">
                 <textarea
                   v-model="review"
                   rows="3"
-                  class="text-zinc-100 border-[1px] border-zinc-700 py-3 w-full shadow-sm block px-4 bg-zinc-900 sm:text-sm rounded-2xl focus:ring-indigo-500 focus:border-indigo-500"
+                  class="text-zinc-100 border-[1px] border-zinc-800 py-3 w-full shadow-sm block px-4 bg-zinc-900 focus:bg-indigo-700/10 sm:text-sm rounded-2xl focus:outline-none focus:border-indigo-500"
                 ></textarea>
               </div>
             </div>
 
-            <div class="flex justify-end">
+            <div class="flex justify-center">
               <button
                 type="submit"
-                class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-zinc-300 bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                class="inline-flex justify-center py-3 mt-3 px-5 border border-transparent transition-all shadow-sm text-sm font-medium rounded-lg text-black bg-white hover:bg-zinc-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-white-500 items-center gap-2 font-roboto-mono"
               >
+                <SaveAll :size="17" />
                 Salvar Livro
               </button>
             </div>
@@ -112,12 +115,14 @@ import { ref } from "vue";
 import BookSearch from "./BookSearch.vue";
 import BookRating from "./BookRating.vue";
 import { addBook } from "../services/api";
+import { SaveAll } from "lucide-vue-next";
 
 export default {
   name: "BookForm",
   components: {
     BookSearch,
     BookRating,
+    SaveAll,
   },
   emits: ["book-added"],
   setup(props, { emit }) {
