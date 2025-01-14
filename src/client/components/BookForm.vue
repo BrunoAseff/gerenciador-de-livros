@@ -73,8 +73,8 @@
             </div>
 
             <div>
-              <label class="block text-sm font-medium text-zinc-300"
-                >Nota (0-5)</label
+              <label class="block text-sm font-medium mt-2 text-zinc-300"
+                >Deixe sua nota</label
               >
               <div class="mt-1">
                 <BookRating v-model="rating" />
@@ -140,8 +140,11 @@ export default {
       try {
         const bookData = {
           ...selectedBook.value,
-          startDate: startDate.value,
-          endDate: endDate.value,
+          // Ajustando o fuso horário para manter a data correta
+          startDate: new Date(startDate.value + "T00:00:00").toISOString(),
+          endDate: endDate.value
+            ? new Date(endDate.value + "T00:00:00").toISOString()
+            : null,
           rating: rating.value,
           review: review.value,
         };
@@ -159,7 +162,6 @@ export default {
         console.error("Error adding book:", error);
       }
     };
-
     return {
       selectedBook,
       startDate,

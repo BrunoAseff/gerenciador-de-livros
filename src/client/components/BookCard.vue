@@ -17,7 +17,7 @@
       <div class="text-sm flex flex-col my-1 text-zinc-500">
         {{ book.authors?.join(", ") }}
       </div>
-      <div class="flex w-full my-6">
+      <div class="flex w-full my-2">
         <span
           class="gap-1 justify-left flex-col w-fit text-zinc-400 flex rounded-2xl text-sm"
           >Data de início
@@ -39,6 +39,13 @@
           </p>
         </span>
       </div>
+      <div class="text-sm flex flex-col my-3 text-zinc-500">
+        <p class="text-zinc-300 font-semibold mt-2">Autores</p>
+        {{ book.authors?.join(", ") }}
+        <p class="text-zinc-300 font-semibold mt-2">Número de páginas</p>
+        <p>{{ book.pageCount }} páginas</p>
+      </div>
+
       <div class="mt-2 mb-4 flex flex-col gap-1">
         <p class="text-zinc-300 font-semibold text-sm">Nota</p>
         <BookRating :modelValue="book.rating" readonly />
@@ -65,7 +72,7 @@
           </button>
         </div>
       </div>
-      <div class="w-full flex justify-end mt-3">
+      <div class="w-full flex justify-end mt-2">
         <button
           @click="handleRemove"
           class="inline-flex justify-center py-2 mt-3 px-4 border-transparent transition-all shadow-sm text-xs font-medium rounded-md bg-zinc-800 text-zinc-300 roboto-mono border-zinc-700 hover:border-red-500 border-[1px] hover:bg-red-900 focus:outline-none focus:ring-2 focus:ring-offset-2 items-center font-roboto-mono gap-2"
@@ -73,7 +80,6 @@
           <Trash2 :size="13" />
           <p>Excluir livro</p>
         </button>
-        >
       </div>
     </div>
   </div>
@@ -110,7 +116,8 @@ const emit = defineEmits(["remove"]);
 const isExpanded = ref(false);
 
 const formatDate = (dateString) => {
-  return new Date(dateString).toLocaleDateString("pt-BR");
+  const date = new Date(dateString.split("T")[0] + "T00:00:00");
+  return date.toLocaleDateString("pt-BR");
 };
 
 const handleRemove = async () => {
