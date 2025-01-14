@@ -1,0 +1,30 @@
+{
+  "name": "book-manager",
+  "version": "1.0.0",
+  "scripts": {
+    "dev:client": "vite",
+    "dev:server": "nodemon src/server/index.js",
+    "dev": "concurrently \"npm run dev:client\" \"npm run dev:server\"",
+    "build": "vite build",
+    "serve": "vite preview",
+    "start": "node src/server/index.js"
+  },
+  "dependencies": {
+    "@headlessui/vue": "^1.x",
+    "axios": "^1.7.9",
+    "cors": "^2.8.5",
+    "express": "^4.21.2",
+    "lucide-vue-next": "^0.471.0",
+    "vue": "^3.x",
+    "vue-router": "^4.x"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^4.x",
+    "autoprefixer": "^10.x",
+    "concurrently": "^8.x",
+    "nodemon": "^2.x",
+    "postcss": "^8.x",
+    "tailwindcss": "^3.x",
+    "vite": "^4.x"
+  }
+}
